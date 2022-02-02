@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src='https://d3js.org/d3.v7.min.js'></script>
+    </head>
+
+    <body>
+        <script>
+            for (let i = 1; i < 11; i++) {
+                
+                let newspan = d3.select("body").append('div');
+                newspan.text(i);
+                newspan.attr("id", 'p'+i);
+                if (i < 6){
+                    newspan.style("color", "red");
+                }
+                else{
+                    newspan.style("color", "green");
+                }
+            }
+
+            d3.select('#p1').text("start");
+            d3.select('#p1').style("color", "purple");
+
+            d3.select('#p10').text("end");
+            d3.select('#p10').style("color", "pink");
+
+        </script>
+    </body>
+</html>

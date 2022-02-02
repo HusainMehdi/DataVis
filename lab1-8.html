@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src='https://d3js.org/d3.v7.min.js'></script>
+
+<body>
+    <script>
+        var myData = ['a', 4, 1, 'b', 6, 2, 8, 9, 'z' ];
+        
+        var span = d3.select("body")
+         .selectAll("span")
+         .data(myData)
+         .enter()
+         .append('span')
+         .text(function (d, i) {
+            return d;
+         })
+         .style("color", function(s){
+            if(isNaN(s)){
+                return "blue";
+            }
+            else{
+                return "green"
+            }
+         });
+        </script>
+</body>
+
+</html>
