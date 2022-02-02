@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <script>
+
+        //Create SVG element
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", 400)
+            .attr("height", 400)
+            .style("border", '1px solid green');
+
+        let shapescsv = 'https://raw.githubusercontent.com/HusainMehdi/DataVis/main/shapes.csv';
+
+        let shapeObjs = [];
+
+        d3.csv(shapescsv, function (data) {
+            
+            shapeObjs.push({"shape": data.shape,"x": data.x,"y": data.y,"x2": data.x2,"y2": data.y2,"r": data.r,"rx": data.rx,"ry": data.ry,"width": data.width,"height": data.height,"colour":data.colour});
+
+        }).then(function () {
+
+            console.log("hey");
+
+            var enterShape = svg.selectAll("myShape")
+                .data(shapeObjs)
+                .enter()
+                .append(function(obj, i){
+                    console.log(obj.shape);
+                    switch (obj.shape) {
+                        case 'rect':
+                            return document.createElementNS('http://www.w3.org/2000/svg', 'rect');;
+                            break;
+                        case 'circle':
+                            return document.createElementNS('http://www.w3.org/2000/svg', 'circle');;
+                            break;
+                        case 'ellipse':
+                            return document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');;
+                            break;
+                        case 'line':
+                            return document.createElementNS('http://www.w3.org/2000/svg', 'line');;
+                            break;
+                    }})
+                    .attr("x", function(obj){return obj.x})
+                    .attr("y", function(obj){return obj.y})
+                    .attr("x1", function(obj){return obj.x})
+                    .attr("y1", function(obj){return obj.y})
+                    .attr("x2", function(obj){return obj.x2})
+                    .attr("y2", function(obj){return obj.y2})
+                    .attr("cx", function(obj){return obj.x})
+                    .attr("cy", function(obj){return obj.y})
+                    .attr("r", function(obj){return obj.r})
+                    .attr("rx", function(obj){if(obj.shape === 'rect'){return 0} else{return obj.rx}})
+                    .attr("ry", function(obj){if(obj.shape === 'rect'){return 0} else{return obj.ry}})
+                    .attr("width", function(obj){return obj.width})
+                    .attr("height", function(obj){return obj.height})
+                    .attr("fill", function(obj){return obj.colour})
+                    .attr("stroke", function(obj){return obj.colour});
+                
+        });
+        
+        
+
+
+
+    </script>
+
+</body>
+
+</html>
