@@ -12,10 +12,18 @@
             .attr("height", 400)
             .style("border", '1px solid green');
 
-        let shapescsv = 'shapes.csv';
+        let shapescsv = 'https://raw.githubusercontent.com/HusainMehdi/DataVis/main/shapes.csv';
 
         d3.csv(shapescsv, function (data) {
             console.log(data.shape);
+            if (data.shape === "rect") {
+                svg.append("rect")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("width", 200)
+                    .attr("height", 100)
+                    .attr("fill", data.colour);
+            }
             // if (data.age >= 1 && data.age <= 30) {
             //     ageRanges[0]++;
             // }
