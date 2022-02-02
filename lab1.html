@@ -17,26 +17,41 @@
         d3.csv(shapescsv, function (data) {
             console.log(data.shape);
             if (data.shape === "rect") {
-                console.log(data.width)
+                console.log(data.x)
                 svg.append("rect")
-                    .attr("x", 0)
-                    .attr("y", 0)
+                    .attr("x", data.x)
+                    .attr("y", data.y)
                     .attr("width", data.width)
-                    .attr("height", 100)
+                    .attr("height", data.height)
                     .attr("fill", data.colour);
             }
-            // if (data.age >= 1 && data.age <= 30) {
-            //     ageRanges[0]++;
-            // }
-            // if (data.age >= 31 && data.age <= 40) {
-            //     ageRanges[1]++;
-            // }
-            // if (data.age >= 41 && data.age <= 60) {
-            //     ageRanges[2]++;
-            // }
-            // if (data.age >= 61 && data.age <= 100) {
-            //     ageRanges[3]++;
-            // }
+            if (data.shape === "circle") {
+                console.log(data.x)
+                svg.append("rect")
+                    .attr("x", data.x)
+                    .attr("y", data.y)
+                    .attr("width", data.width)
+                    .attr("height", data.height)
+                    .attr("fill", data.colour);
+            }
+            if (data.shape === "ellipse") {
+                console.log(data.x)
+                svg.append("rect")
+                    .attr("x", data.x)
+                    .attr("y", data.y)
+                    .attr("width", data.width)
+                    .attr("height", data.height)
+                    .attr("fill", data.colour);
+            }
+            if (data.shape === "line") {
+                console.log(data.x)
+                svg.append("rect")
+                    .attr("x", data.x)
+                    .attr("y", data.y)
+                    .attr("width", data.width)
+                    .attr("height", data.height)
+                    .attr("fill", data.colour);
+            }
         })
 
 
