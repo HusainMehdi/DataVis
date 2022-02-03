@@ -16,15 +16,7 @@
             const data = [];
             switch (wave) {
                 case 'sin':
-                    let linsecsv = 'https://raw.githubusercontent.com/HusainMehdi/DataVis/main/sin.csv';
-
-                    for (let i = 0; i < numPoints; i++) {
-                        d3.csv(linsecsv, function (data) {
-
-                            data.push({ x: data.x, y: data.y });
-
-                        }); console.log(Math.sin(6.2 * i / 100))
-                    }
+                    for (let i = 0; i < numPoints; i++) { data.push({ x: i / 100, y: Math.sin(6.2 * i / 100) }); }
                     break;
                 case 'cos':
                     for (let i = 0; i < numPoints; i++) { data.push({ x: i / 100, y: Math.cos(6.2 * i / 100) }); }
@@ -89,7 +81,7 @@
                 );
         }
 
-        drawLine('sin');
+        drawLine('cos');
     </script>
 
 </body>
