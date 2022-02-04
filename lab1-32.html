@@ -5,7 +5,7 @@
     <script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
     <script>
 
-var body = d3.select('body');
+        var body = d3.select('body');
         var myColor0 = d3.scaleLinear().domain([1, 10]).range(["white", "blue"]);
         var myColor1 = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateCool);
         var myColor2 = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateViridis);
@@ -101,9 +101,16 @@ var body = d3.select('body');
             .attr("cy", function (d) { return y(d.y) })
             .attr("r", 5)
             .style("fill", function (d) {
-                return myColor1(d.x*10);
+                return myColor1(d.x * 10);
             });
 
+        d3.select("p")
+            .append("svg:image")
+            .attr("xlink:href", "img/icons/sun.svg")
+            .attr("width", 40)
+            .attr("height", 40)
+            .attr("x", 228)
+            .attr("y", 53);
 
 
 

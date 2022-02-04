@@ -3,9 +3,18 @@
 
 <body>
     <script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
+    <style>
+        div {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 1px;
+            padding: 10px;
+        }
+    </style>
     <script>
 
-var body = d3.select('body');
+        var body = d3.select('body');
         var myColor0 = d3.scaleLinear().domain([1, 10]).range(["white", "blue"]);
         var myColor1 = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateCool);
         var myColor2 = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateViridis);

@@ -2,28 +2,8 @@
 <html lang="en">
 
 <body>
-    <script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
     <script>
-
-var body = d3.select('body');
-        var myColor0 = d3.scaleLinear().domain([1, 10]).range(["white", "blue"]);
-        var myColor1 = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateCool);
-        var myColor2 = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateViridis);
-        /*
-        d3.range(5)
-        [0, 1, 2, 3, 4]
-        */
-        var data2 = d3.range(5);
-        var myColor3 = d3.scaleOrdinal().domain(data2).range(["gold", "blue", "green", "yellow"]);
-        var myColor4 = d3.scaleOrdinal().domain(data2).range(d3.schemeSet3);
-        var cols = [myColor0,
-            myColor1,
-            myColor2,
-            myColor3,
-            myColor4];
-
-
-
         // Set Dimensions
         const xSize = 600; const ySize = 600;
         const margin = 40;
@@ -35,8 +15,7 @@ var body = d3.select('body');
         const data = [];
         for (let i = 0; i < numPoints; i++) { data.push({ x: i / 100, y: Math.sin(6.2 * i / 100) }); }
 
-
-
+    
 
         // Get the 'limits' of the data - the full extent (mins and max)
         // so the plotted data fits perfectly
@@ -92,7 +71,6 @@ var body = d3.select('body');
             );
 
 
-
         svg.selectAll("dot")
             .data(data)
             .enter()
@@ -100,13 +78,7 @@ var body = d3.select('body');
             .attr("cx", function (d) { return x(d.x) })
             .attr("cy", function (d) { return y(d.y) })
             .attr("r", 5)
-            .style("fill", function (d) {
-                return myColor1(d.x*10);
-            });
-
-
-
-
+            .style("fill", "red");
 
 
     </script>
