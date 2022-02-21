@@ -10,7 +10,6 @@
         const data = [10, 15, 20, 25, 30];
         // Note different valid ways of specifying color
         const colors = ['#ffffcc', 'red', 'rgb(0,255,0)', '#31a354', '#006837'];
-        const shapes = ['circle', 'rect', 'circle', 'rect', 'circle'];
         const svg = d3.select("body")
             .append("svg")
             .attr("width", width)
@@ -24,15 +23,16 @@
                 return "translate(0,0)";
             })
 
-        g.append(function(d, i){
-                    switch (shapes[i]) {
-                        case 'rect':
-                            return document.createElementNS('http://www.w3.org/2000/svg', 'rect');;
-                            break;
-                        case 'circle':
-                            return document.createElementNS('http://www.w3.org/2000/svg', 'circle');;
-                            break;
-                    }})
+        g.append(function (d, i) {
+            switch (data[i] % 10) {
+                case 0:
+                    return document.createElementNS('http://www.w3.org/2000/svg', 'rect');;
+                    break;
+                case 5:
+                    return document.createElementNS('http://www.w3.org/2000/svg', 'circle');;
+                    break;
+            }
+        })
             .attr("cx", function (d, i) {
                 return i * 100 + 50;
             })
@@ -45,10 +45,10 @@
             .attr("fill", function (d, i) {
                 return colors[i];
             })
-            .attr("x", function(d,i){return (i * 100 + 50)-(d*1.5)})
-            .attr("y", function(d,i){return 100-(d*1.5)})
-            .attr("width", function(d,i){return d*3})
-            .attr("height", function(d,i){return d*3})
+            .attr("x", function (d, i) { return (i * 100 + 50) - (d * 1.5) })
+            .attr("y", function (d, i) { return 100 - (d * 1.5) })
+            .attr("width", function (d, i) { return d * 3 })
+            .attr("height", function (d, i) { return d * 3 })
 
         g.append("text")
             .attr("x", function (d, i) {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+
+
+<p></p>
+
+
+
+    <script>
+        var myData = ['a', 'b', 'c', 'd'];
+
+        var p = d3.select("body")
+            .selectAll("p")
+            .data(myData)
+            .enter()
+            .append('p')
+            .attr("class", "b")
+            .text(function (d, i) {
+                return d;
+            })
+            .append('p')
+            .attr("class", "c")
+            .text("hovertext")
+            ;
+
+    </script>
+
+    <span class="b">Hover over me!</span>
+    <div class="c">I will show on hover</div>
+    <style>
+        p{
+
+            color: black;
+        }
+
+        div {
+            background-color: yellow;
+            padding: 20px;
+            display: none;
+        }
+
+        p:hover+ .c {
+            display: inline-block;
+        }
+    </style>
+</body>

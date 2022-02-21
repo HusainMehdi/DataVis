@@ -51,6 +51,13 @@
             .append("g")
             .attr("transform", "translate(" + margin + "," + margin + ")");
 
+        svg.append("svg:image")
+            .attr("xlink:href", "https://raw.githubusercontent.com/HusainMehdi/DataVis/main/img.jpeg")
+            .attr("width", xSize)
+            .attr("height", ySize)
+            .attr("x", 0)
+            .attr("y", -margin)
+
         // X Axis
         const x = d3.scaleLinear()
             .domain([xExtent[0], xExtent[1]])
@@ -104,13 +111,7 @@
                 return myColor1(d.x * 10);
             });
 
-        d3.select("p")
-            .append("svg:image")
-            .attr("xlink:href", "img/icons/sun.svg")
-            .attr("width", 40)
-            .attr("height", 40)
-            .attr("x", 228)
-            .attr("y", 53);
+
 
 
 
