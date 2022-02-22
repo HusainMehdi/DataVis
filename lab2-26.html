@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
+
+
+    <p></p>
+
+
+    <script>
+    let intrDate = d3.interpolateDate(new Date("01/01/2000"), new Date("02/22/2022"))
+    console.log( intrDate(0.5) );
+
+    d3.select("p").style("color",function(){return intrDate(0.5)})
+    .text("The day between 01/01/2000 and 02/22/2022 is " + intrDate(0.5))
+    
+    </script>
+</body>

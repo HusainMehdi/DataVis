@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
+
+
+    <p>The returned value is 'rgb(128, 64, 0)', 0.5 the way between green [rgb(0, 128, 0)], and red [rgb(256, 0, 0)] </p>
+
+
+    <script>
+    let cc = d3.interpolate('red', 'green')
+    console.log( cc(0.5) );
+
+    d3.select("p").style("color",function(){return cc(0.5)})
+    
+    </script>
+</body>
