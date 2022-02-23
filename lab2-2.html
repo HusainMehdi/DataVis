@@ -6,7 +6,7 @@
 
 
 <p></p>
-
+<p></p>
 
 
     <script>
@@ -24,6 +24,7 @@
             .append('p')
             .attr("class", "c")
             .text("hovertext")
+
             ;
 
     </script>
@@ -31,10 +32,7 @@
     <span class="b">Hover over me!</span>
     <div class="c">I will show on hover</div>
     <style>
-        p{
 
-            color: black;
-        }
 
         div {
             background-color: yellow;
@@ -42,7 +40,7 @@
             display: none;
         }
 
-        p:hover+ .c {
+        .b:hover+ .c {
             display: inline-block;
         }
     </style>
