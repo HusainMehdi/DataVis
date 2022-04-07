@@ -4,7 +4,7 @@
 <body>
     <script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
 
-    <button onclick="update(pie(dataset.apples))">Variable 1</button>
+    <button onclick="update(pie(dataset3.apples))">Variable 1</button>
     <button onclick="update(pie(dataset2.apples))">Variable 2</button>
 
     <script>
@@ -13,6 +13,9 @@
         };
         var dataset2 = {
             apples: [23, 56, 2, 67, 30],
+        };
+        var dataset3 = {
+            apples: [1, 2, 3, 4, 5],
         };
 
         var width = 460,
@@ -35,6 +38,8 @@
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
         function update(data) {
+            svg.selectAll("path").remove();
+
             var path = svg.selectAll("path")
                 .data(data)
                 .enter()
@@ -51,7 +56,7 @@
                     }
                 });
         }
-        update(pie(dataset.apples));
+        update(pie(dataset2.apples));
     </script>
 
 

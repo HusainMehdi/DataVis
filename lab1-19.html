@@ -6,9 +6,6 @@
 
     <script>
 
-
-
-
         function createBar(inputcsv) {
             const data = [50, 400, 300, 900, 250, 1000]
             const width = 500;
@@ -55,17 +52,10 @@
                         .attr("dy", ".35em")
                         .style('text-anchor', 'end')
                         .text(function (d) { return d; });
-
-
                 })
         }
         createBar('https://raw.githubusercontent.com/HusainMehdi/DataVis/main/bars.csv');
         createBar('https://raw.githubusercontent.com/HusainMehdi/DataVis/main/bars2.csv');
-
-
-
     </script>
-
 </body>
-
 </html>

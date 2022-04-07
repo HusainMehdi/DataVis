@@ -75,7 +75,8 @@
                 .attr("y", "1")
                 .on("mouseover", function onMouseOver(d, i) {
                     console.log("jhg");
-                    u.enter().append("text")
+
+                    svg.append("text")
                         .attr('class', 'val')
                         .attr('x', function (d) { return x(i.group); })
                         .attr('y', function (d) { console.log(y(i.value)); return y(i.value); })
@@ -86,7 +87,7 @@
                 })
                 .on("mouseout", function onMouseOut(d, i) {
                     console.log("hfgcvjbjbchjk");
-                    u.enter().selectAll('.val')
+                    svg.selectAll('.val')
                         .remove()
                 })
                 .transition()

@@ -2,26 +2,39 @@
 <html lang="en">
 
 <body>
+    <style>
+        .b {
+            padding: 20px;
+        }
+
+        .c {
+            background-color: yellow;
+            padding: 20px;
+            display: none;
+        }
+
+
+        .b:hover .c {
+            position: absolute;
+            display: inline-block;
+        }
+    </style>
     <script src='https://d3js.org/d3.v7.min.js'></script>
-
-
-<p></p>
-<p></p>
 
 
     <script>
         var myData = ['a', 'b', 'c', 'd'];
 
-        var p = d3.select("body")
-            .selectAll("p")
+        d3.select("body")
+            .selectAll("div")
             .data(myData)
             .enter()
-            .append('p')
+            .append('div')
             .attr("class", "b")
             .text(function (d, i) {
                 return d;
             })
-            .append('p')
+            .append('div')
             .attr("class", "c")
             .text("hovertext")
 
@@ -29,19 +42,5 @@
 
     </script>
 
-    <span class="b">Hover over me!</span>
-    <div class="c">I will show on hover</div>
-    <style>
-
-
-        div {
-            background-color: yellow;
-            padding: 20px;
-            display: none;
-        }
-
-        .b:hover+ .c {
-            display: inline-block;
-        }
-    </style>
+  
 </body>
