@@ -22,7 +22,7 @@
         <div class="column">
             <!-- Top Right Layout -->
             <div class="rows" style="background-color:#ccc;" id="topright">
-                <svg id="pieSvg" preserveAspectRatio="none" viewBox="-450 -200 800 1200"></svg>
+                <svg id="map2Svg" preserveAspectRatio="none" viewBox="-220 -120 440 225"></svg>
             </div>
 
             <!-- Bottom Right Layout -->
@@ -60,6 +60,11 @@
             width = +mapSvg.attr("width"),
             height = +mapSvg.attr("height");
 
+        const mapSvg2 = d3.select("#map2Svg"),
+            widthOb = +mapSvg2.attr("width"),
+            heightOb = +mapSvg2.attr("height");
+
+
 
         // Map and projection
         const path = d3.geoPath();
@@ -70,6 +75,7 @@
 
         // Data and color scale
         const data = new Map();
+        const dataOb = new Map();
         var myCol = d3.scaleSequential().domain([1, 10]).interpolator(d3.interpolateYlOrRd);
 
 
@@ -141,7 +147,7 @@
         }
 
 
-        //----MAP----
+        //----BIG MAC MAP----
 
         // Load external data and boot
         mapSvg.append('rect')
@@ -150,7 +156,7 @@
             .attr('width', 5)
             .attr('height', 5)
             .attr('stroke', 'white')
-            .attr('fill', '#581845');
+            .attr('fill', '#CF0E21');
 
         mapSvg.append('rect')
             .attr('x', -200)
@@ -158,21 +164,21 @@
             .attr('width', 5)
             .attr('height', 5)
             .attr('stroke', 'white')
-            .attr('fill', '#E9F5FF');
+            .attr('fill', '#FEE21C');
 
         mapSvg.append("text")
             .attr("x", -190)
             .attr("y", 62)
             .attr("dy", ".35em")
             .attr("font-size", 8)
-            .text("Most total cases");
+            .text("Highest price for a Big Mac (USD)");
 
         mapSvg.append("text")
             .attr("x", -190)
             .attr("y", 82)
             .attr("dy", ".35em")
             .attr("font-size", 8)
-            .text("Least total cases");
+            .text("Lowest price for a Big Mac (USD)");
 
 
         function updateMap(viewedDate) {
@@ -214,12 +220,13 @@
                             return myCol((d.total));
                         })
                         .style("stroke", "transparent")
-                        .attr("class", function (d) { 
-                            
-                            if((data.get(d.id)|| 0)==0){
+                        .attr("class", function (d) {
+
+                            if ((data.get(d.id) || 0) == 0) {
                                 return "noCountry"
                             }
-                            else{return "Country" };})
+                            else { return "Country" };
+                        })
                         .attr("id", function (d) {
                             // console.log(d);
                             // console.log(d.id);
@@ -229,12 +236,102 @@
                         .on("mouseover", mouseOver)
                         .on("mouseleave", mouseLeave)
                         .on("click", countryClick)
-                        mapSvg.selectAll(".noCountry").remove();
+                    mapSvg.selectAll(".noCountry").remove();
 
 
                 })
         }
 
+
+        //----OBESE MAP----
+
+        // Load external data and boot
+        mapSvg2.append('rect')
+            .attr('x', -200)
+            .attr('y', 60)
+            .attr('width', 5)
+            .attr('height', 5)
+            .attr('stroke', 'white')
+            .attr('fill', '#581845');
+
+        mapSvg2.append('rect')
+            .attr('x', -200)
+            .attr('y', 80)
+            .attr('width', 5)
+            .attr('height', 5)
+            .attr('stroke', 'white')
+            .attr('fill', '#E9F5FF');
+
+        mapSvg2.append("text")
+            .attr("x", -190)
+            .attr("y", 62)
+            .attr("dy", ".35em")
+            .attr("font-size", 8)
+            .text("Most total cases");
+
+        mapSvg2.append("text")
+            .attr("x", -190)
+            .attr("y", 82)
+            .attr("dy", ".35em")
+            .attr("font-size", 8)
+            .text("Least total cases");
+
+
+        function updateMapOb(viewedDate) {
+
+            Promise.all([
+                d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+                d3.csv("https://raw.githubusercontent.com/HusainMehdi/DataVis/main/death-rate-from-obesity.csv", function (d) {
+
+                    if (d.Year == viewedDate) {
+                        console.log(d)
+                        dataOb.set(d.Code, +d.Deaths)
+
+                    }
+                })]).then(function (loadData) {
+                    let topo = loadData[0]
+
+                    console.log(dataOb);
+
+                    mapSvg2.selectAll(".Country").remove();
+
+                    // --Draw Map--
+                    mapSvg2.append("g")
+                        .selectAll("path")
+                        .data(topo.features)
+                        .enter()
+                        .append("path")
+                        // draw each country
+                        .attr("d", d3.geoPath()
+                            .projection(projection)
+                        )
+                        // set the color of each country
+                        .attr("fill", function (d) {
+                            d.total = data.get(d.id) || 0;
+                            return myCol((d.total));
+                        })
+                        .style("stroke", "transparent")
+                        .attr("class", function (d) {
+
+                            if ((data.get(d.id) || 0) == 0) {
+                                return "noCountry"
+                            }
+                            else { return "Country" };
+                        })
+                        .attr("id", function (d) {
+                            // console.log(d);
+                            // console.log(d.id);
+                            return d.id
+                        })
+                        .style("opacity", .8)
+                        .on("mouseover", mouseOver)
+                        .on("mouseleave", mouseLeave)
+                        .on("click", countryClick)
+                    mapSvg2.selectAll(".noCountry").remove();
+
+
+                })
+        }
 
         //----LINE GRAPH----
 
@@ -624,6 +721,7 @@
             })
 
         updateMap("2011-07-01");
+        updateMapOb("2011");
         updatePie("GBR", "2022-03-01");
         updateLine("GBR");
 
